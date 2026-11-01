@@ -1,0 +1,26 @@
+{
+  "source": "https://github.com/fserb/pt-br",
+  "branch": "master",
+  "generatedAt": "2026-10-30T22:06:32.368031Z",
+  "hashes": {
+    "lexico": "1148de44d58d59e40ef0a6695acefc031acf3f3e6bbfbfcc4c18d85660bde7c1",
+    "conjugações": "eacf64d23e951c032cacf6662a5850b5fefe1f6b770c21c3eb731b75ccc99892",
+    "icf": "5b9c79978eeeba8496749ba5777895bc99cbee8b12a107b7d34e6cae9aabac97",
+    "listas/negativas": "a84bdddc734afe75782bab835e27c6b1db32cb77b8ea712853e33fe26d0a2e4f",
+    "LICENSE": "667532c0584a1c67ac75b83c13241d9286c9704d07e608d7e84bdaa9b3096d9c"
+  },
+  "originals": {
+    "lexico": 145744,
+    "conjugacoes": 195751,
+    "icf": 419486
+  },
+  "fiveLetterForms": {
+    "lexico": 6298,
+    "conjugacoes": 3543,
+    "icf": 12116
+  },
+  "accepted": 11296,
+  "answers": 2137,
+  "maxICF": 14.5,
+  "policy": "Todas as grafias de cinco letras do léxico, conjugações e ICF como palpites; respostas do léxico com ICF <= maxICF, excluindo negativas; desambiguação pela pontuação ICF e ordem lexicográfica."
+}
