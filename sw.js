@@ -1,5 +1,5 @@
 /* Cache offline de arquivos estáticos; nunca interceptar API de downloads. */
-const VERSION = 'termo-github-releases-v1';
+const VERSION = 'termo-github-releases-v2';
 const CORE = [
   '/', '/index.html', '/manifest.webmanifest', '/assets/icon.svg',
   '/windows-download.js', '/windows-download.css', '/termo-abrir-direto.html'
