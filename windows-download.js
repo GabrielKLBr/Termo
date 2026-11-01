@@ -1,6 +1,7 @@
 /* Ícone de downloads na navegação do Termo, exclusivo para visitantes Windows. */
 (() => {
   'use strict';
+  const KNOWN_RELEASE = {installer:{url:'https://github.com/GabrielKLBr/Termo/releases/download/v1.0.0/Termo-Setup-1.0.0-x64.exe',size:121690298},portable:{url:'https://github.com/GabrielKLBr/Termo/releases/download/v1.0.0/TermoWindows.zip',size:157662885}};
   const platform = navigator.userAgentData?.platform || navigator.platform || '';
   if (!(/windows/i.test(platform) || /Win32|Win64/i.test(platform) || /Windows NT/i.test(navigator.userAgent || ''))) return;
 
@@ -65,22 +66,22 @@
 
   async function refresh(dialog) {
     const status = dialog.querySelector('#windows-download-status');
-    status.textContent = 'Verificando arquivos disponíveis...';
+    updateOption(dialog, 'download-installer', KNOWN_RELEASE.installer);
+    updateOption(dialog, 'download-portable', KNOWN_RELEASE.portable);
+    status.textContent = 'Escolha a versão desejada.';
     try {
-      const response = await fetch('/api/downloads', { cache: 'no-store' });
+      const response = await fetch('/api/downloads?t=' + Date.now(), { cache: 'no-store' });
       if (!response.ok) throw new Error('HTTP ' + response.status);
       const data = await response.json();
       if (!dialog.open) return;
-      const installer = updateOption(dialog, 'download-installer', data.installer);
-      const portable = updateOption(dialog, 'download-portable', data.portable);
+      const installer = updateOption(dialog, 'download-installer', data.installer || KNOWN_RELEASE.installer);
+      const portable = updateOption(dialog, 'download-portable', data.portable || KNOWN_RELEASE.portable);
       status.textContent = installer && portable ? 'Escolha a versão que preferir.' :
         installer || portable ? 'Uma das versões ainda está sendo disponibilizada.' :
         'Os arquivos para Windows ainda não foram enviados ao servidor.';
     } catch (err) {
       if (!dialog.open) return;
-      updateOption(dialog, 'download-installer', null);
-      updateOption(dialog, 'download-portable', null);
-      status.textContent = 'Não foi possível verificar os downloads agora.';
+      status.textContent = 'Downloads disponíveis pela release oficial no GitHub.';
     }
   }
 
