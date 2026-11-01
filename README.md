@@ -1,18 +1,11 @@
-# Termo Infinito 🎮
+# Termo Infinito (site)
 
-Jogo de palavras em português com **Termo**, **Dueto** e **Quarteto**, partidas ilimitadas, progresso salvo no navegador e interface inspirada no Termo.
+Site independente com dicionário incorporado no HTML, modos Termo, Dueto e Quarteto e botão de download para Windows.
 
-**Jogue no navegador:** https://termoinf.vercel.app
+- `index.html`: versão completa do jogo (funciona sem backend, exceto consulta da release).
+- `termo-abrir-direto.html`: cópia idêntica, pode abrir localmente.
+- `windows-download.js`: menu de downloads do Windows, com links de fallback da release v1.0.0.
+- `api/downloads.mjs`: consulta a **última release pública** do GitHub, sem expor token.
+- `sw.js`: cache offline do jogo; não armazena respostas da API de downloads.
 
-## Downloads para Windows
-
-Acesse a aba [Releases](../../releases/latest) e escolha:
-
-- `Termo-Setup-1.0.0-x64.exe`: instalador para Windows x64.
-- `TermoWindows.zip`: versão portátil para Windows x64.
-
-## Desenvolvimento
-
-Os arquivos desta pasta são a versão web publicada na Vercel. `index.html` contém o jogo e o dicionário offline. O endpoint `api/downloads.mjs` consulta a release pública `v1.0.0` para habilitar as opções de download do Windows.
-
-O projeto não é afiliado ao jogo Termo original.
+**Importante:** enviar esse código ao GitHub não atualiza automaticamente o Vercel sem integração Git no projeto.
