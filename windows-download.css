@@ -1,0 +1,21 @@
+/* Diálogo do download de Windows. Não altera o layout dos tabuleiros. */
+#windows-download-dialog {box-sizing:border-box;width:min(450px,calc(100vw - 24px));max-height:calc(100dvh - 32px);overflow:auto;padding:22px;border:2px solid #988991;border-radius:14px;background:#4b3f44;color:#fafaff;font:400 16px/1.5 Mitr,sans-serif;box-shadow:0 18px 55px rgba(0,0,0,.4)}
+#windows-download-dialog::backdrop {background:rgba(20,13,16,.72);backdrop-filter:blur(3px)}
+#windows-download-dialog .windows-download-heading {display:flex;align-items:center;justify-content:space-between;gap:12px}
+#windows-download-dialog h2 {margin:0;font:600 25px/1.2 Mitr,sans-serif}
+#windows-download-dialog .windows-download-close {border:none;background:transparent;color:#fafaff;cursor:pointer;font:400 32px/1 sans-serif;padding:0 3px}
+#windows-download-dialog .windows-download-close:hover {color:#d3ad69}
+#windows-download-dialog .windows-download-intro {margin:12px 0 17px;color:#e2d9df;font-size:14px}
+#windows-download-dialog .windows-download-options {display:grid;gap:10px}
+#windows-download-dialog .windows-download-option {display:flex;align-items:center;gap:12px;padding:13px 12px;border:2px solid #978890;border-radius:10px;text-decoration:none;color:#fafaff;background:#615458;cursor:pointer;transition:background .18s,border-color .18s}
+#windows-download-dialog .windows-download-option:hover:not(.is-disabled),#windows-download-dialog .windows-download-option:focus-visible:not(.is-disabled) {background:#74656a;border-color:#fafaff}
+#windows-download-dialog .windows-download-option.is-disabled {opacity:.65;cursor:not-allowed}
+#windows-download-dialog .windows-download-option-icon {font-size:24px;line-height:1;width:27px;text-align:center;flex:none}
+#windows-download-dialog .windows-download-option-copy {flex:1;display:flex;flex-direction:column;min-width:0}
+#windows-download-dialog .windows-download-option-copy strong {font-size:15px;font-weight:600}
+#windows-download-dialog .windows-download-option-copy small {font-size:11px;line-height:1.35;color:#ddd2d8;font-weight:300}
+#windows-download-dialog .windows-download-option-state {font-size:11px;font-weight:500;max-width:85px;text-align:right}
+#windows-download-dialog #windows-download-status {font-size:12px;margin:14px 0 8px;color:#e5d9df}
+#windows-download-dialog .windows-download-note {font-size:11px;color:#c9bcc2;margin:9px 0 0;font-weight:300}
+@media(max-width:430px){#windows-download-dialog{padding:16px}#windows-download-dialog .windows-download-option-state{max-width:70px}}
+@media(prefers-reduced-motion:reduce){#windows-download-dialog *,#windows-download-dialog *::before,#windows-download-dialog *::after {transition:none!important}}
