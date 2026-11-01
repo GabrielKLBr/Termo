@@ -1,9 +1,4 @@
 node_modules/
 .vercel/
-.env
-.env.*
-*.exe
-*.msi
-TermoWindows.zip
-.Terminal
-.DS_Store
+.env*
+*.log
