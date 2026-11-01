@@ -1,0 +1,95 @@
+{
+  "name": "termo-ilimitado-desktop",
+  "version": "1.0.1",
+  "private": true,
+  "description": "Termo, Dueto e Quarteto, com dicionário Python e interface Electron sem bordas",
+  "main": "electron/main.cjs",
+  "author": "Projeto independente",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "prestart": "npm run icons",
+    "dev": "electron . --devtools",
+    "predev": "npm run icons",
+    "icons": "node scripts/generate-icons.mjs",
+    "build": "npm run build:win",
+    "build:win": "npm run icons && electron-builder --win nsis portable",
+    "build:dir": "npm run icons && electron-builder --dir",
+    "build:linux": "npm run icons && electron-builder --linux AppImage",
+    "build:mac": "npm run icons && electron-builder --mac dmg",
+    "test": "node --test tests/project.test.mjs tests/navigation.test.mjs && python tools/test_dictionary.py"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "electron": "^45.2.0",
+    "electron-builder": "^26.18.0",
+    "png-to-ico": "^3.0.2",
+    "sharp": "^0.34.5"
+  },
+  "build": {
+    "appId": "com.gabrielklbr.termo",
+    "productName": "Termo",
+    "asar": true,
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "electron/**/*",
+      "index.html",
+      "src/**/*",
+      "assets/**/*",
+      "data/dictionary.json",
+      "data/fserb-pt-br-LICENSE.txt",
+      "LICENSE-DICIONARIO.txt",
+      "build/icon.ico",
+      "build/icon.png",
+      "!**/*.map",
+      "!**/tests/**"
+    ],
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Termo",
+      "artifactName": "Termo-Setup-${version}-${arch}.${ext}"
+    },
+    "linux": {
+      "icon": "build/icon.png",
+      "category": "Game",
+      "target": [
+        "AppImage"
+      ]
+    },
+    "mac": {
+      "icon": "build/icon.png",
+      "category": "public.app-category.word-games",
+      "target": [
+        "dmg"
+      ]
+    },
+    "portable": {
+      "artifactName": "Termo-Portable-${version}-${arch}.${ext}"
+    }
+  }
+}
