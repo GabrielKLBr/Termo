@@ -1,0 +1,12 @@
+{
+ "name":"Termo · Dueto · Quarteto",
+ "short_name":"Termo",
+ "description":"Jogo de palavras em português com três modos",
+ "start_url":"./?modo=termo",
+ "scope":"./",
+ "display":"standalone",
+ "background_color":"#6E5C62",
+ "theme_color":"#6E5C62",
+ "lang":"pt-BR",
+ "icons":[{"src":"./assets/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
