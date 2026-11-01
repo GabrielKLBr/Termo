@@ -43,8 +43,8 @@ wc-modal[aria-hidden="false"] {display:block !important;}
 #modal-content .share-preview {white-space:pre-wrap;font-size:.8em;line-height:1.4;word-break:break-word;}
 @media (max-width:520px) {#modal-content {font-size:16px;}}
 </style>
-<link rel="stylesheet" href="/windows-download.css">
-<script defer src="/windows-download.js"></script>
+<link rel="stylesheet" href="/windows-download.css?v=20261101-6">
+<script defer src="/windows-download.js?v=20261101-6"></script>
 </head><body>
 <wc-bar class="show"><template shadowrootmode="open"><style type="text/css">
 
@@ -940,7 +940,7 @@ function renderRow(b,r,animate=false){const row=instance[b]?.rows[r];if(!row)ret
  const feedback=past?.feedback?.[b];
  row.cells.forEach((cell,i)=>{
   if(feedback){displayCell(cell,past.word[i],feedback[i],false,animate,i*205);}
-  else if(isActive){displayCell(cell,game.current[i],null,i===Math.min(4,game.cursor));}
+  else if(isActive){displayCell(cell,game.current[i],null,game.current.includes('')&&i===game.cursor);}
   else displayCell(cell,'',null,false,false,0,'future');
  });
 }
@@ -971,11 +971,20 @@ function invalidGuess(message){notify(message);for(const b of instance){if(game.
  const row=b.rows[game.rounds.length];if(!row)continue;
  row.style.animation='none';void row.offsetWidth;row.style.animation='rownope .45s ease-in-out';setTimeout(()=>row.style.animation='',480);
 }}
+function nextEmptyAfter(position){
+ // Avançar para a próxima casa vazia, pulando preenchidas e dando a volta
+ // até a primeira lacuna. 5 indica que a linha está inteiramente completa.
+ for(let step=1;step<=5;step++){
+  const i=(position+step)%5;
+  if(!game.current[i])return i;
+ }
+ return 5;
+}
 function typeLetter(ch){if(!game||game.finished||locked)return;ch=NORM(ch);if(!/^[A-Z]$/.test(ch))return;
- const pos=game.cursor;
- if(pos>=5)return;
+ const pos=game.cursor===5?game.current.findIndex(value=>!value):game.cursor;
+ if(pos<0||pos>=5)return;
  game.current[pos]=ch;
- game.cursor=Math.min(5,pos+1);save();renderEditable();popType(pos);
+ game.cursor=nextEmptyAfter(pos);save();renderEditable();popType(pos);
 }
 function advanceCursor(){if(!game||game.finished||locked)return;
  // O espaço pula uma casa sem escrever e sem apagar a letra que já está nela.
@@ -984,9 +993,17 @@ function advanceCursor(){if(!game||game.finished||locked)return;
 }
 function eraseLetter(){if(!game||game.finished||locked)return;
  let i=game.cursor;
+ // Uma linha completa tem cursor 5: apagar última casa e selecioná-la,
+ // sem saltar mais uma casa para trás.
  if(i===5)i=4;
- else if(i>0&&!game.current[i])i--;
- if(i>=0){game.current[i]='';game.cursor=i;save();renderEditable();}
+ else if(i>0&&!game.current[i]){
+  let previous=i-1;
+  while(previous>=0&&!game.current[previous])previous--;
+  if(previous>=0)i=previous;
+ }
+ if(i>=0&&i<5&&game.current[i]){
+  game.current[i]='';game.cursor=i;save();renderEditable();
+ }
 }
 function evaluate(guess,answer){const g=[...NORM(guess)],s=[...NORM(answer)],out=Array(5).fill('wrong'),remaining={};
  for(let i=0;i<5;i++){if(g[i]===s[i]){out[i]='right';}else remaining[s[i]]=(remaining[s[i]]||0)+1;}
