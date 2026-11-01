@@ -1,0 +1,19 @@
+{
+  "name": "Termo ilimitado · Dueto · Quarteto",
+  "short_name": "Termo ilimitado",
+  "description": "Jogo de palavras em português com três modos, sem limite de partidas.",
+  "start_url": "./?modo=termo",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#6E5C62",
+  "theme_color": "#6E5C62",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "./assets/icon.svg?v=20261101-1",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
