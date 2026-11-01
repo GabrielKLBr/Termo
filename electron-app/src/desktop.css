@@ -1,0 +1,106 @@
+/* O Electron muda só o layout. O arredondamento externo vem da janela nativa do Windows 11. */
+html.electron {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  background: #6e5c62;
+  overflow: hidden;
+}
+html.electron body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+html.electron wc-bar {
+  width: 100%;
+  max-width: none;
+  font-size: 20px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+html.electron wc-bar.show {
+  height: 3em;
+}
+/* O menu fica sobre toda a largura do app, sem max-width de 720/1440px. */
+html.electron .desktop-heading {
+  position: relative;
+  -webkit-app-region: drag;
+  app-region: drag;
+  display: grid;
+  grid-template-columns: minmax(125px,1fr) minmax(300px,720px) minmax(155px,1fr);
+  align-items: center;
+  flex-shrink: 0;
+  width: 100%;
+  height: clamp(60px,8vh,72px);
+  box-sizing: border-box;
+  background-color: #6e5c62;
+}
+html.electron .desktop-drag-area {
+  -webkit-app-region: drag;
+  app-region: drag;
+  height: 100%;
+  min-width: 0;
+  user-select: none;
+}
+html.electron .desktop-heading wc-header {
+  justify-self: center;
+  width: 100%;
+  min-width: 0;
+  max-width: 720px;
+  height: 100%;
+  -webkit-app-region: drag;
+  app-region: drag;
+}
+html.electron .desktop-window-controls {
+  -webkit-app-region: drag;
+  app-region: drag;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+  box-sizing: border-box;
+  padding: 0 17px 0 3px;
+  height: 100%;
+  min-width: 0;
+  z-index: 10;
+}
+html.electron .desktop-window-control {
+  appearance: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  border: 2px solid #b7aeb4;
+  border-radius: 20%;
+  background: transparent;
+  padding: 3px;
+  cursor: pointer;
+  -webkit-app-region: no-drag;
+  app-region: no-drag;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+html.electron .desktop-window-control img {
+  display: block;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+/* Hover only inside the visible outlined button, never in an invisible 47px box. */
+html.electron .desktop-window-control:hover { background-color: rgba(255,255,255,.13); }
+html.electron .desktop-window-control:active { background-color: rgba(255,255,255,.20); }
+html.electron .desktop-window-control:focus-visible { outline: 2px solid #fafaff; outline-offset: 2px; }
+html.electron .desktop-window-control[data-action="close"]:hover { background-color: #b13e4f; border-color: #fff; }
+html.electron .desktop-window-control[data-action="close"]:hover img { filter: brightness(0) invert(1); }
+html.electron main { min-height: 0; }
+@media (max-width: 790px) {
+  html.electron .desktop-heading {
+    grid-template-columns: minmax(16px,1fr) minmax(285px,720px) 155px;
+  }
+  html.electron .desktop-window-controls { gap: 4px; padding-right: 10px; }
+}
